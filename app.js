@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static("/"));
 app.get("/", async (req, res) => {
-    // res.send("Hello");
+    res.send("Hello1");
 });
 BTFirebaseNotification.init(app);
 // //////////////////////////////////////////////SERVICE FUNCTION///////////////////////////////////////////

@@ -38,7 +38,7 @@ app.use(cookieParser());
 app.use(express.static("/"));
 
 app.get("/", async (req: Request, res: Response): Promise<void> => {
- // res.send("Hello");
+ res.send("Hello1");
 });
 
 BTFirebaseNotification.init(app);

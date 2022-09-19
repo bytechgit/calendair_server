@@ -9,7 +9,7 @@ var firebaseApp = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 const db = firebaseApp.firestore(); 
-import { getMessaging, MulticastMessage} from "firebase-admin/messaging";
+import {MulticastMessage} from "firebase-admin/messaging";
 
 const localDict: Map<string, any> = new Map<string,any>();
 
