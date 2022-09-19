@@ -7,7 +7,6 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
-import { BTFirebaseNotification, getNotificationService } from "./FirebaseNotification.js";
 /////////////////////////////////////////////INITIALIZATION/////////////////////////////////////////
 var port = process.env.PORT || "3000";
 app.set("port", port);
@@ -29,10 +28,10 @@ app.use(express.static("/"));
 app.get("/", async (req, res) => {
     res.send("Hello1");
 });
-BTFirebaseNotification.init(app);
+//BTFirebaseNotification.init(app);
 // //////////////////////////////////////////////SERVICE FUNCTION///////////////////////////////////////////
 app.get("/test", async (req, res) => {
-    getNotificationService()?.sendNotificationToTopic("Calendair", "backend", "hhhhh").then((e) => console.log(e));
+    //  getNotificationService()?.sendNotificationToTopic("Calendair","backend","hhhhh").then((e)=>console.log(e));
 });
 app.get("/", (req, res) => {
     res.send(JSON.stringify([

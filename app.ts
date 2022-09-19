@@ -41,12 +41,12 @@ app.get("/", async (req: Request, res: Response): Promise<void> => {
  res.send("Hello1");
 });
 
-BTFirebaseNotification.init(app);
+//BTFirebaseNotification.init(app);
 
 // //////////////////////////////////////////////SERVICE FUNCTION///////////////////////////////////////////
 
 app.get("/test", async (req: Request, res: Response): Promise<void> => {
-  getNotificationService()?.sendNotificationToTopic("Calendair","backend","hhhhh").then((e)=>console.log(e));
+//  getNotificationService()?.sendNotificationToTopic("Calendair","backend","hhhhh").then((e)=>console.log(e));
 });
 
 
