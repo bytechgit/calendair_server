@@ -1,0 +1,37 @@
+{
+  "type": "module",
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "dependencies": {
+    "@firebase/firestore": "^3.5.0",
+    "@firebase/messaging": "^0.9.14",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.25",
+    "body-parser": "^1.20.0",
+    "cmake-js": "^6.3.2",
+    "commonjs": "^0.0.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "firebase": "^9.8.3",
+    "firebase-admin": "^10.3.0",
+    "googleapis": "^100.0.0",
+    "http": "^0.0.1-security",
+    "http-errors": "^2.0.0",
+    "module": "^1.2.5",
+    "morgan": "^1.10.0",
+    "node-schedule": "^2.1.0",
+    "path": "^0.12.7",
+    "require": "^2.4.20",
+    "rxjs": "^7.5.6",
+    "ts-node": "^10.7.0",
+    "ts-node-dev": "^1.1.8"
+  }
+}
