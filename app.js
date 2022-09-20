@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
+import { BTFirebaseNotification, getNotificationService } from "./FirebaseNotification.js";
 /////////////////////////////////////////////INITIALIZATION/////////////////////////////////////////
 var port = process.env.PORT || "3000";
 app.set("port", port);
@@ -28,10 +29,11 @@ app.use(express.static("/"));
 app.get("/", async (req, res) => {
     res.send("Hello1");
 });
-//BTFirebaseNotification.init(app);
+BTFirebaseNotification.init(app);
 // //////////////////////////////////////////////SERVICE FUNCTION///////////////////////////////////////////
 app.get("/test", async (req, res) => {
-    //  getNotificationService()?.sendNotificationToTopic("Calendair","backend","hhhhh").then((e)=>console.log(e));
+    //getNotificationService()?.sendNotificationToUsers(["cQThfxfoSBqqiRH5LM-Yqq:APA91bHOJSpAcXtJ5TYv-EUyQQhmwKljnhX69hdDI7hgkNsJnO20LJkpziXuR26IL5A0_dY9gAyojsl4_0OPwDOqFaBvkV2dW77WGBw97jLx7pL6nNxnIevkvSacYN-Sp8MKWu2Jn8Xg"],"title","message","img").then((e:any)=>res.send(e));//sendNotificationToTopic("Krstaa","backend","hhhhh")
+    getNotificationService()?.sendNotificationToTopic("Krstaa", "backend", "hhhhh").then((e) => res.send(e)); //
 });
 app.get("/", (req, res) => {
     res.send(JSON.stringify([

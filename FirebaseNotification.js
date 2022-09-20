@@ -1,17 +1,30 @@
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-var admin = require("firebase-admin");
 const schedule = require('node-schedule');
-var serviceAccount = require("./serviceAccountKey.json");
-var firebaseApp = admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
+import { getFirestore } from "firebase-admin/firestore";
+const admin = require("firebase-admin");
+const key = require("./serviceAccountKey.json");
+const firebaseApp = admin.initializeApp({
+    credential: admin.credential.cert({
+        "type": "service_account",
+        "project_id": "calendair-8abb9",
+        "private_key_id": "fbf597961ea5ac1b20947bf077d4c39d39547b27",
+        "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCTSn7b2gzr9/UM\nkG1htX7Cf1KJYq6iQ1Ld4lXkJlb5f9bBVgfTJXzW/g4KiH9tnPRtbFY+W8gxb//O\nCLKDjAlwKCmM7dCDqiribF7wJ/cLp+qCNexQl5rBQLsh0a0n8GVff5ZVbJYxy/O6\nY7UVPRlBrLQZwaNROzxSQX6c8GU61Aoirvt7x0C1ohNTG4O+38QiiUyrRbBrisqU\nMzVSMhq+v1TQFClDWDyIjaLK+JQY0qRoWsx8nAKUGdwuMRBarc5XztbpWj85nayc\ndyIY3fMb7HhneBXLWCSeEvWYM6nSd4Lco+kUN5LSa83WjMYkZcZgFGXbJy9xFq2W\nWpR0XZbRAgMBAAECggEACPVLwUd6GBcz7sphM7NSIQZVRNS1GDp54ZO+q3ZTPYAb\nZbV7uvllhg4sOJLoFKiqU1YmqerjQnH8U/mykUaA67LOoaMUZrCgpHYowUid+XYS\nUM5yp61r0K+FHiPCeTqRUNFJyXrl6OQNmB9Qs/isBsL4LnWY7zOoCdzwxF7o2j6z\n9LVAmU1CQhaDRJs8VV4ljXF60JSNltRdh8sd+gPEfqvq69fd7LsQ97464axpx6wt\nQT/DXybfQf1nBonXUcABniNhW7Q8m51OoAEMBiefBPuombR47aZBRClFi5BNKwih\nimSWeJYA3npTxA9IqR6eFXX5fXL+A3LvOZjuzSEbgQKBgQDLQXYsRyCi6cG+4l67\nz+pNXF1rWuCCe3qEj1YtNaDFIOLsNajaUPZJ41xF/tzBMqpVwBoZGj0nMZAeMFsc\nhZhdKQqa74poXqZwlsOp+RDi7vLnc8ac3cflODCLWncOZKMPD2peaCE8Vc/nL9a6\nYujml4we7yVRKJUjCZWCBMekUQKBgQC5gznjufHPFFd6WqKvYm8f8W3ujHmTiNDE\nZ7i06iekauY/z6PMPrxRHA3VZ0qYYTymw4PzDK17sX5OEeH85f2H0CA98gKnagCH\nHkzvWbgnjykgylPBHjPmf7Jebyb8fikANrk0BT0COD58Juw0y1UlPQ3iym81AwuP\nLhxlwsaqgQKBgQCvnO+tcgcQu0da1dtkClA2ZweQKgSwuF8zCWU7yooNyExIKlSp\nzCn/zSF8mKfDhTMGw+PIrJMJuhj6/Gy8R/FNDJjNJQpBAwZrYNfNlBSy/iGBONbx\n0e1UbygCPzd+iBUafgc5al7M8pee+AZfI/Z2xZmbYKStapLwouc6X0bfAQKBgHfj\nuNvVZdLAgLBQNudFpC9upe8O1dtlBhaIObShxzDY7Si8Fk1/FdENYltSP8EuxjW4\nEWRYAx33XXsyz2vTbwAAn3WpG9H6DZFFIc9lmj/mo1vPpkUeMch7KlkhWH7BQdoj\ng5l88SqoEqnFtc2AwuwoAvtYfHo0F5pW4H9bW20BAoGACGaL5aVWRnEbM9Vx5hYr\nDr+OS3ZeQWwFi0OX11IqbKytlmnmvgNUI8fV3BNG2bLehb5Tbe816/0TfHuT8hTp\ncSNTGCGsOjyKXPnTPFz3c7s40H9EBigzFAjjIf0+aX0m+ilzKdy9g/GvjJGQv5fW\napo9mrVkIh6F4kJYedJtkwQ=\n-----END PRIVATE KEY-----\n",
+        "client_email": "firebase-adminsdk-kl94j@calendair-8abb9.iam.gserviceaccount.com",
+        "client_id": "101116806742509390576",
+        "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+        "token_uri": "https://oauth2.googleapis.com/token",
+        "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+        "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-kl94j%40calendair-8abb9.iam.gserviceaccount.com"
+    }),
 });
-const db = firebaseApp.firestore();
+//admin.firestore.setLogFunction(console.log);
 const localDict = new Map();
+//getFirestore(firebaseApp).collection("Assignments").doc().get().then((e)=>console.log(e));
 class MyFirebaseNotification {
     constructor(app) {
         this.app = app;
-        db.collection("Assignments")
+        getFirestore(firebaseApp).collection("Assignments")
             .onSnapshot((snapshot) => {
             snapshot.docChanges().forEach((change) => {
                 if (change.type === "added") {
@@ -19,9 +32,10 @@ class MyFirebaseNotification {
                     const assignment = change.doc.data();
                     const date = assignment.dueDate.toDate();
                     date.setDate(date.getDate() - 1);
+                    console.log(date);
                     if (date > new Date()) {
                         const reminder = schedule.scheduleJob(date, () => {
-                            console.log("REMINDER");
+                            console.log("Sended assignment " + change.doc.id.substring(0, 12) + "_assignments");
                             this.sendNotificationToTopic(change.doc.id.substring(0, 12) + "_assignments", assignment.title, "1 day left to finish.");
                             localDict.get(change.doc.id)?.cancel();
                         });
@@ -40,8 +54,8 @@ class MyFirebaseNotification {
     }
     init() {
         this.app.post("/testsend", async (req, res) => {
-            res.send("asd");
         });
+        console.log("FIREBASE INIT COMPLITED");
     }
     async sendNotificationToTopic(topic, title, body) {
         const message = {
@@ -60,7 +74,7 @@ class MyFirebaseNotification {
         };
         return admin.messaging().send(message);
     }
-    async sendNotificationToUser(tokens, title, message, image) {
+    async sendNotificationToUsers(tokens, title, message, image) {
         const messageObject = {
             data: {
                 imageURL: image,

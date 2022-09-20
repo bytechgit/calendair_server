@@ -8,8 +8,6 @@
     "start": "node ./app.js"
   },
   "dependencies": {
-    "@firebase/firestore": "^3.5.0",
-    "@firebase/messaging": "^0.9.14",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.25",
     "body-parser": "^1.20.0",
@@ -20,8 +18,9 @@
     "debug": "^4.3.4",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
-    "firebase": "^9.8.3",
-    "firebase-admin": "^10.3.0",
+    "firebase": "^9.10.0",
+    "firebase-admin": "^11.0.1",
+    "firebase-messaging": "^1.0.6",
     "googleapis": "^100.0.0",
     "http": "^0.0.1-security",
     "http-errors": "^2.0.0",

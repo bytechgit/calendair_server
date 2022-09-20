@@ -41,12 +41,13 @@ app.get("/", async (req: Request, res: Response): Promise<void> => {
  res.send("Hello1");
 });
 
-//BTFirebaseNotification.init(app);
+BTFirebaseNotification.init(app);
 
 // //////////////////////////////////////////////SERVICE FUNCTION///////////////////////////////////////////
 
 app.get("/test", async (req: Request, res: Response): Promise<void> => {
-//  getNotificationService()?.sendNotificationToTopic("Calendair","backend","hhhhh").then((e)=>console.log(e));
+  //getNotificationService()?.sendNotificationToUsers(["cQThfxfoSBqqiRH5LM-Yqq:APA91bHOJSpAcXtJ5TYv-EUyQQhmwKljnhX69hdDI7hgkNsJnO20LJkpziXuR26IL5A0_dY9gAyojsl4_0OPwDOqFaBvkV2dW77WGBw97jLx7pL6nNxnIevkvSacYN-Sp8MKWu2Jn8Xg"],"title","message","img").then((e:any)=>res.send(e));//sendNotificationToTopic("Krstaa","backend","hhhhh")
+  getNotificationService()?.sendNotificationToTopic("Krstaa","backend","hhhhh").then((e:any)=>res.send(e));//
 });
 
 
