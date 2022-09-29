@@ -35,8 +35,8 @@ class MyFirebaseNotification {
                     console.log(date);
                     if (date > new Date()) {
                         const reminder = schedule.scheduleJob(date, () => {
-                            console.log("Sended assignment " + change.doc.id.substring(0, 12) + "_assignments");
-                            this.sendNotificationToTopic(change.doc.id.substring(0, 12) + "_assignments", assignment.title, "1 day left to finish.");
+                            console.log("Sended assignment " + change.doc.id.substring(0, 12) + "finishAssignments");
+                            this.sendNotificationToTopic(change.doc.id.substring(0, 12) + "finishAssignments", assignment.title, "1 day left to finish.");
                             localDict.get(change.doc.id)?.cancel();
                         });
                         localDict.set(change.doc.id, reminder);
